@@ -1,0 +1,20 @@
+<body class="backgroud" >
+	 <div
+    id="intro-example"
+    class="top6">
+    <div class="text-center">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <% flash.each do |message_type, message| %>
+            <h4 style="color: white;"><%= message %></h4>
+          <% end %>
+          <h1 class="mb-4">Online Booking Travel</h1>
+          <h5 class="mb-4">Khắp phá thế giới diệu kì</h5>
+	          <div class="btn btn-outline-light btn-lg m-2">
+	            <%= link_to "Khám phá ngay", tours_path, class:"mytitle" %>
+	          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

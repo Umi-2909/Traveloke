@@ -1,0 +1,16 @@
+<body class="body-user">
+  <div class="list-user">
+    <% @users.each do |user|%>
+      <% if user.id != current_user.id %>
+      <div>
+        <br>
+       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtIl7wH9e3R30UjakpNgVZe5ZQCNFH8VQgIhgb3Fp39ni8fms_1b6TDo-nG82qUYsBUac&usqp=CAU" style = "width: 50px;height: 50px;">
+        <%= link_to user.name, get_user_modal_path(user), remote: true, 
+          class: "user-info text-user" %>
+        <%= link_to 'Delete', delete_user_path(user.id),class:'color_status', data: {confirm: "xóa tài khoản này?"}, method: :delete %>
+      </div>
+      <% end -%>
+    <% end -%>
+  </div>
+</body>
+<%= render 'modal' %>

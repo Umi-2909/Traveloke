@@ -1,0 +1,47 @@
+const sendReview = (url) => {
+	const comment = $('#text_review').val();
+	if (comment.trim().length == 0) return;
+	$.ajax({
+		url: url,
+		dataType: 'json',
+		type: 'post',
+		data: {
+			'comment': comment
+		},
+		success: function(data) {
+			console.log(data);
+			const isAdmin = data.user.role == "admin";
+   		let reviewNode = isAdmin ?
+   			`<div class="review-item" id='reviewid-${data.review.id}'>
+   			<a
+					data-url="/tours/${data.review.tour_id}/reviews/${data.review.id}"
+					data-review-id="${data.review.id}"
+					class="sweet-delete-comment"
+				>
+					<i class="fa fa-times" aria-hidden="true" style="opacity: 0.4"></i>
+				</a>
+				<span style="color: #2980b9;">${data.user.name}: </span>${data.review.comment}</div>`
+			: `<div class="review-item" id='reviewid-${data.review.id}'>
+				<span style="color: #2980b9;">${data.user.name}: </span>${data.review.comment}</div>`
+   		$('#reviews_section').prepend(reviewNode);
+			$('#text_review').val('');
+    	}
+	});
+}
+
+$(document).on("click", "#submit_review", function(e){
+	const { url } = e.currentTarget.dataset;
+	sendReview(url);
+});
+$(document).on("keypress", "#text_review", function(e){
+	let url = `${location.href}/reviews`;
+	let isPressEnter = e.keyCode == 13;
+	if (isPressEnter) {
+		sendReview(url);
+		const commentBox = document.getElementById('reviews_section');
+		// scrollToBottom(commentBox);
+	}
+});
+function scrollToBottom(node) {
+	node.scrollTop = node.scrollHeight;
+}
