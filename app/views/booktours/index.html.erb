@@ -2,31 +2,45 @@
   <div class="top5">
     <% if current_user.admin? %>
         <tr>
-          <th>Tên tour</th>
-          <th>Khách hàng</th>
-          <th>Điện Thoại</th>
-          <th>Ngày đặt tour</th>
-          <th>Giá Tiền</th>
-          <th>Trạng Thái</th>
+          <th style="padding-left:12px">Tên Tour</th>
+          <th style="padding-left:12px">Khách Hàng</th>
+          <th style="padding-left:12px">Điện Thoại</th>
+          <th style="padding-left:12px">Email</th>
+          <th style="padding-left:12px">Ngày đặt Tour</th>
+          <th style="padding-left:12px">
+            Khởi hành vào ngày
+          </th>
+          <th style="padding-left:12px">Số Lượng</th>
+          <th style="padding-left:12px">Giá Tiền</th>
+          <th style="padding-left:12px">Trạng Thái</th>
         </tr>
       <% @booktours.each do |booktour| %>
         <tr>
-          <td>
+          <td style="padding-left:12px">
             <%= booktour.tour.name %>
           </td>
-          <td>
+          <td style="padding-left:12px">
             <%= booktour.user.name%>
           </td>
-          <td>
+          <td style="padding-left:12px">
             <%= booktour.user.phone%>
           </td>
-          <td>
-            <%= booktour.datebook.strftime("%d/%m/%Y") %>
+          <td style="padding-left:12px">
+            <%= booktour.user.email%>
           </td>
-          <td>
-            <%= number_to_currency(booktour.totalprice) %>
+          <td style="padding-left:12px">
+            <%= booktour.datebook.strftime("%d/%m/%Y %H:%M:%S") %>
           </td>
-          <td>
+          <td style="padding-left:12px">
+            <%= booktour.tour.starday.strftime("%d/%m/%Y") %>
+          </td>
+          <td style="padding-left:12px">
+            <%= booktour.nuofgu%>
+          </td>
+          <td style="padding-left:12px">
+            <%= number_to_currency(booktour.totalprice, unit: "", delimiter: ",") %> VND
+          </td>
+          <td style="padding-left:12px">
             <%= link_to booktour.status_i18n,
               update_status_booktour_path(booktour.id),
               method: :patch,
@@ -38,57 +52,57 @@
       <% end %>
     <% else %>
         <tr>
-          <th>
-            Tên tour
+          <th style="padding-left:12px">
+            Tên Tour
           </th>
-          <th>
+          <th style="padding-left:12px">
             Thời gian
           </th>
-          <th>
+          <th style="padding-left:12px">
             Khởi hành vào ngày
           </th>
-          <th>
+          <th style="padding-left:12px">
             Số thành viên
           </th>
-          <th>
-            Ngày đặt tour
+          <th style="padding-left:12px">
+            Ngày đặt Tour
           </th>
-          <th>
+          <th style="padding-left:12px">
             Tổng tiền
           </th>
-          <th>
+          <th style="padding-left:12px">
             Hủy Tour
           </th>
-          <th>
+          <th style="padding-left:12px">
             Trạng Thái
           </th>
         </tr>
       <% @booktours.each do |booktour| %>
         <tr>
-          <td>
+          <td style="padding-left:12px">
             <%= booktour.tour.name %>
           </td>
-          <td>
-            <%= booktour.tour.tourday %>ngày
+          <td style="padding-left:12px">
+            <%= booktour.tour.tourday %> ngày
           </td>
-          <td>
+          <td style="padding-left:12px">
             <%= booktour.tour.starday.strftime("%d/%m/%Y") %>
           </td>
-          <td>
+          <td style="padding-left:12px">
             <%= booktour.nuofgu %>
           </td>
-          <td>
-            <%= booktour.datebook.strftime("%d/%m/%Y") %> 
+          <td style="padding-left:12px">
+            <%= booktour.datebook.strftime("%d/%m/%Y") %>
           </td>
-          <td>
-            <%= number_to_currency(booktour.totalprice) %> VND
+          <td style="padding-left:12px">
+            <%= number_to_currency(booktour.totalprice, unit: "", delimiter: ",") %> VND
           </td>
           <% if !booktour.confirmed?%>
-            <td>
+            <td style="padding-left:12px">
               <%= link_to "Hủy",booktour_path(booktour), :data => {:confirm => 'Hủy tour này?'}, method: :delete%>
             </td>
           <%else%>
-            <td>
+            <td style="padding-left:12px">
               Không thể hủy
             </td>
           <% end %>

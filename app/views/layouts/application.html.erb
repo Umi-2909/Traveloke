@@ -48,7 +48,7 @@
       <% if current_user %>
         <% if current_user.admin? %>
             <li>
-              <%= link_to "Danh sách Tour",booktours_path, class: "nav-link", style:"width: 160px;"%>
+              <%= link_to "Duyệt Tour",booktours_path, class: "nav-link", style:"width: 120px;"%>
             </li>
         <% else %>
             <li>
@@ -57,24 +57,21 @@
         <% end %>
       <% end %>
 
-      <li class="nav-item" style="width: 100px;">
-        <%= link_to "Trang chủ", tours_url, class: "nav-link" %>
+      <li class="nav-item" style="width: 150px;">
+        <%= link_to "Danh sách Tour", tours_url, class: "nav-link" %>
       </li>
       <% if current_user %>
-        <li class="nav-item" style="width: 100px;">
-          <%= link_to "Đăng xuất", destroy_user_session_path, method: :delete, class: "nav-link" %>
-        </li>
         <li class="nav-item dropdown style="width: 100px;"">
-          <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            Tài khoản
+          <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> <%= current_user.name %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <% if current_user.admin? %>
-                <%= link_to "Tài khoản", users_index_path, class: "dropdown-item" %>
+                <%= link_to "Quản lý tài khoản", users_index_path, class: "dropdown-item" %>
+                <%= link_to "Trang cá nhân", users_profile_path, class: "dropdown-item" %>
             <% else %>
             <%= link_to "Trang cá nhân", users_profile_path, class: "dropdown-item" %>
             <% end %>
-            <%= link_to "Cài đặt", '#', class: "dropdown-item" %>
+            <%= link_to "Đăng xuất", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
         </li>
 
@@ -91,7 +88,7 @@
         <div class="form-outline">
           <%= search_form_for @q do |f| %>
           <%= f.search_field :name_cont %>
-          <%= f.submit %>
+          <%= f.submit "Tìm kiếm"%>
         </div>
       </div>
     <% end %>

@@ -18,14 +18,14 @@
       </div>
     </div>
 	  <div class="actions">
-	    <%= f.submit "Lọc", class: ' filter_date' %>
+	    <%= f.submit "Tìm", class: ' filter_date' %>
 	  </div>
   </div>
 <% end %>
 
 	<h1 class="current-category"><%= params[:category] %></h1>
 	<% if @tours.count == 0 %>
-			<h2>Hiện tại loại này không có Tour nào</h2>
+			<h2>Hiện tại không có Tour nào</h2>
 	<% else %>
 		<div class="tour-wrapper">
 			<% @tours.each do |tour| %>

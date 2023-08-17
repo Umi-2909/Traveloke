@@ -15,7 +15,7 @@
 				<h4>Loại tour: <%= @tour.category.name%></h4>
 				<h4>Điểm đến: <%= @tour.destination%></h4>
 				<h4>Thời gian: <%= @tour.tourday %> ngày</h4>
-				<h4>Giá tour: <%=number_to_currency(@tour.price) %>VND/1 người</h4>
+				<h4>Giá tour: <%= number_to_currency(@tour.price, delimiter: ",", format: "%n", strip_insignificant_zeros: true)%> VND/1 người</h4>
 				<h4>Khởi hành: <%= @tour.starday.strftime("%d/%m/%Y") %></h4>
 			</div>
 				<%= link_to "Trở về",tours_path, class: "btn btn-primary" %>
@@ -52,7 +52,7 @@
 			<%= render partial: 'tour_review' %>
 		</div>
 	</div>
-</div>	
+</div>
 <div>
 	<h2 align="center">
 		<u>
